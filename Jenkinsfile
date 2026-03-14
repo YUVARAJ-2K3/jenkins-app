@@ -18,9 +18,17 @@ pipeline {
                 echo 'testing'
                 npm test
                 echo 'tested'
-                
                 '''
             }
         } 
+        stage ('deploy'){
+            steps{
+                sh '''
+                echo 'deploying'
+                npm install -g serve
+                serve -s build
+                '''
+            }
+        }
     }
 }
