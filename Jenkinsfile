@@ -18,6 +18,7 @@ pipeline {
                 echo 'testing'
                 npm test
                 echo 'tested'
+                
                 '''
             }
         } 
