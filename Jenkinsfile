@@ -25,7 +25,6 @@ pipeline {
             steps{
                 sh '''
                 echo 'deploying'
-                npm install -g serve
                 serve -s build
                 '''
             }
