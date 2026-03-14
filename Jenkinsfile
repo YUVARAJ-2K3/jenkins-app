@@ -2,15 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage ('docker'){
+        stage ('build'){
                 steps {
                 sh 'echo "witoutdocker"'
                 sh 'npm --version'
                 sh 'ls'
-                sh 'cd jenkins-app'
                 sh 'npm install'
-                sh 'npm run start'
-                
+                sh 'npm run build'
+                sh 'echo "build done"'
+            }
+        }
+        stage ('deploy'){
+            steps{
+                sh '''
+                echo 'deploy'
+                '''
             }
         } 
     }
