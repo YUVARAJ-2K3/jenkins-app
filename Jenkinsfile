@@ -6,16 +6,9 @@ pipeline {
                 steps {
                 sh 'echo "witoutdocker"'
                 sh 'npm --version'
+                echo "hello panda"
                 
             }
         }
-        stage ('test'){
-            steps{
-                sh '''
-                echo 'testing'
-                echo 'tested'
-                '''
-            }
-        } 
     }
 }
