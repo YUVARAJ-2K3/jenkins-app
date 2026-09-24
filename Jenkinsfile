@@ -9,6 +9,10 @@ pipeline {
                     reuseNode true
                 }
             }
+            environment {
+                HOME = "${WORKSPACE}"
+                npm_config_cache = "${WORKSPACE}/.npm"
+            }
             steps {
                 sh '''
                     ls -la
