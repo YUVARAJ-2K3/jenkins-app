@@ -2,14 +2,35 @@ pipeline {
     agent any
 
     stages {
-        stage ('build'){
-                steps {
-                sh 'echo "witoutdocker"'
-                sh 'npm --version'
-                echo "hello panda"
-                echo "test github webhook"
-                echo 'Meow Meow'
-                
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
+                    ls -la
+                    node --version
+                    npm --version
+                    npm ci
+                    npm run build
+                    ls -la
+                '''
+            }
+        }
+        stage('Test'){
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                echo 'Test Stage'
+                sh 'test -f build/index.html'
+                sh 'npm test'
             }
         }
     }
