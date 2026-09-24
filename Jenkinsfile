@@ -7,6 +7,7 @@ pipeline {
                 sh 'echo "witoutdocker"'
                 sh 'npm --version'
                 echo "hello panda"
+                echo "test github webhook"
                 
             }
         }
