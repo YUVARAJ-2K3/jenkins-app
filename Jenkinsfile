@@ -8,6 +8,7 @@ pipeline {
                 sh 'npm --version'
                 echo "hello panda"
                 echo "test github webhook"
+                echo 'Meow Meow'
                 
             }
         }
