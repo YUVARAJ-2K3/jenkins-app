@@ -33,19 +33,20 @@ pipeline {
                 sh 'npm test'
             }
         }
-        stage('Deploy'){
+        stage('Deploy') {
             agent {
                 docker {
                     image 'node:18-alpine'
+                    args '-u root'
                     reuseNode true
                 }
             }
             steps {
                 echo 'Deploy Stage'
                 sh '''
-                apk add --no-cache python3 make g++
-                npm install --no-save netlify-cli
-                node_modules/.bin/netlify --version
+                    apk add --no-cache python3 make g++
+                    npm install --no-save netlify-cli
+                    node_modules/.bin/netlify --version
                 '''
                 echo 'Deploy Success'
             }
