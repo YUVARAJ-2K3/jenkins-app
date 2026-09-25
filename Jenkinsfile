@@ -37,5 +37,20 @@ pipeline {
                 sh 'npm test'
             }
         }
+        stage('Deploy'){
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                echo 'Deploy Stage'
+                sh '''
+                npm install netlify-cli
+                node_modules/.bin/netflix --version
+                '''
+            }
+        }
     }
 }
