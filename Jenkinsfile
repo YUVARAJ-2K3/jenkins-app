@@ -55,13 +55,20 @@ pipeline {
                 '''
             }
         }
+        
+    }
+    post {
+        failure {
+                echo 'Build failed!'
+            }
 
-        OnFailure {
-            echo 'Build failed!'
-        }
-
-        OnSuccess {
-            echo 'Build succeeded!'
-        }
+        success {
+                echo 'Build succeeded!'
+            }
+        
+        always {
+                echo 'Cleaning up...'
+                cleanWs()
+            }
     }
 }
