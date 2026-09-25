@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment{
-        NETLIFY_SITE_ID = "123456789abcdef"
+        NETLIFY_SITE_ID = credentials('netlify_site_id')
+        NETLIFY_ACCESS_TOKEN = credentials('netlify_access_token')
     }
 
     stages {
@@ -49,10 +50,18 @@ pipeline {
                 sh '''
                     npm install --no-save netlify-cli
                     node_modules/.bin/netlify --version
+                    node_modules/.bin/netlify status
+                    node_modules/.bin/netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=build
                 '''
-                echo 'Deploy Success'
-                echo "Deploying to Netlify site ID: ${NETLIFY_SITE_ID}"
             }
+        }
+
+        OnFailure {
+            echo 'Build failed!'
+        }
+
+        OnSuccess {
+            echo 'Build succeeded!'
         }
     }
 }
