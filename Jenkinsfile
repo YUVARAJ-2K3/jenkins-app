@@ -9,10 +9,6 @@ pipeline {
                     reuseNode true
                 }
             }
-            environment {
-                HOME = "${WORKSPACE}"
-                npm_config_cache = "${WORKSPACE}/.npm"
-            }
             steps {
                 sh '''
                     ls -la
@@ -48,8 +44,9 @@ pipeline {
                 echo 'Deploy Stage'
                 sh '''
                 npm install netlify-cli
-                node_modules/.bin/netflix --version
+                node_modules/.bin/netlify --version
                 '''
+                echo 'Deploy Success'
             }
         }
     }
