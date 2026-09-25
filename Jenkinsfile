@@ -43,7 +43,8 @@ pipeline {
             steps {
                 echo 'Deploy Stage'
                 sh '''
-                npm install netlify-cli
+                apk add --no-cache python3 make g++
+                npm install --no-save netlify-cli
                 node_modules/.bin/netlify --version
                 '''
                 echo 'Deploy Success'
