@@ -205,8 +205,6 @@ pipeline {
                 echo 'Deploying to Netlify production'
 
                 sh '''
-                    npm install --no-save netlify-cli
-
                     node_modules/.bin/netlify deploy \
                         --site "$NETLIFY_SITE_ID" \
                         --auth "$NETLIFY_ACCESS_TOKEN" \
