@@ -117,7 +117,7 @@ pipeline {
                 echo 'Deploying to Netlify staging'
 
                 sh '''
-                    npm install --no-save netlify-cli node-jq
+                    npm install --no-save netlify-cli 
 
                     node_modules/.bin/netlify --version
 
@@ -132,7 +132,9 @@ pipeline {
 
                 script {
                     env.STAGING_URL = sh(
-                        script: "node_modules/.bin/node-jq -r '.deploy_url' deploy-output.json",
+                        script: '''
+                            node -e "const d=require('./deploy-output.json'); console.log(d.deploy_url || d.deployUrl || d.url)"
+                        ''',
                         returnStdout: true
                     ).trim()
 
